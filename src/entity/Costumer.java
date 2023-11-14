@@ -1,6 +1,7 @@
 
 package entity;
 import java.io.Serializable;
+
 import java.util.Objects;
 
 
@@ -31,14 +32,15 @@ public class Costumer implements Serializable {
     }
 
 
-
     public Costumer(String cFirstname, String cLastname, int cTelNumber, double cBalance) {
         this.Firstname = cFirstname;
         this.Lastname = cLastname;
         this.TelNumber = cTelNumber;
         this.Balance = cBalance;
+
     }
 
+    
     public String getcFirstname() {
         return Firstname;
     }
