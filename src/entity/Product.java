@@ -20,13 +20,22 @@ public class Product implements Serializable {
         this.type = type;
         this.quantity = quantity;
     }
-
+    
+    public void subtractQuantity(int quantity) {
+        if (quantity <= this.quantity) {
+            this.quantity -= quantity;
+        } else {
+            System.out.println("Error: Insufficient quantity.");
+        }
+    }
+    
     public Product() {
     }
 
     public String getName() {
         return name;
     }
+    
 
     public void setName(String name) {
         this.name = name;
@@ -95,6 +104,6 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "Product{" + "name= " + name + ", price= " + price + ", type= " + type + ", quantity= " + quantity + '}';
+        return "Product(" + "name=" + name + ", price=" + price + ", type=" + type + ", quantity=" + quantity+")";
     }
 }

@@ -1,68 +1,83 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package entity;
 import java.io.Serializable;
 import java.util.Objects;
 
 
 public class Costumer implements Serializable {
-    private String cFirstname;
-    private String cLastname;
-    private int cTelNumber;
-    private double cBalance;
-
-    public Costumer() {
+    private String Firstname;
+    private String Lastname;
+    private int TelNumber;
+    private double Balance;
+    
+     public String getFullName() {
+        return Firstname + " " + Lastname;
+    }
+     
+    public void subtractBalance(double amount) {
+        if (amount <= Balance) {
+            Balance -= amount;
+        } else {
+            System.out.println("Error: Insufficient funds.");
+        }
     }
 
+    public double getBalance() {
+        return Balance;
+    }
+
+    public void addBalance(double amount) {
+        Balance += amount;
+    }
+
+
+
     public Costumer(String cFirstname, String cLastname, int cTelNumber, double cBalance) {
-        this.cFirstname = cFirstname;
-        this.cLastname = cLastname;
-        this.cTelNumber = cTelNumber;
-        this.cBalance = cBalance;
+        this.Firstname = cFirstname;
+        this.Lastname = cLastname;
+        this.TelNumber = cTelNumber;
+        this.Balance = cBalance;
     }
 
     public String getcFirstname() {
-        return cFirstname;
+        return Firstname;
     }
 
     public void setcFirstname(String cFirstname) {
-        this.cFirstname = cFirstname;
+        this.Firstname = Firstname;
     }
 
     public String getcLastname() {
-        return cLastname;
+        return Lastname;
     }
 
     public void setcLastname(String cLastname) {
-        this.cLastname = cLastname;
+        this.Lastname = cLastname;
     }
 
     public int getcTelNumber() {
-        return cTelNumber;
+        return TelNumber;
     }
 
     public void setcTelNumber(int cTelNumber) {
-        this.cTelNumber = cTelNumber;
+        this.TelNumber = cTelNumber;
     }
 
     public double getcBalance() {
-        return cBalance;
+        return Balance;
     }
 
     public void setcBalance(double cBalance) {
-        this.cBalance = cBalance;
+        this.Balance = cBalance;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + Objects.hashCode(this.cFirstname);
-        hash = 79 * hash + Objects.hashCode(this.cLastname);
-        hash = 79 * hash + this.cTelNumber;
-        hash = 79 * hash + (int) (Double.doubleToLongBits(this.cBalance) ^ (Double.doubleToLongBits(this.cBalance) >>> 32));
+        hash = 79 * hash + Objects.hashCode(this.Firstname);
+        hash = 79 * hash + Objects.hashCode(this.Lastname);
+        hash = 79 * hash + this.TelNumber;
+        hash = 79 * hash + (int) (Double.doubleToLongBits(this.Balance) ^ (Double.doubleToLongBits(this.Balance) >>> 32));
         return hash;
     }
 
@@ -78,16 +93,16 @@ public class Costumer implements Serializable {
             return false;
         }
         final Costumer other = (Costumer) obj;
-        if (this.cTelNumber != other.cTelNumber) {
+        if (this.TelNumber != other.TelNumber) {
             return false;
         }
-        if (Double.doubleToLongBits(this.cBalance) != Double.doubleToLongBits(other.cBalance)) {
+        if (Double.doubleToLongBits(this.Balance) != Double.doubleToLongBits(other.Balance)) {
             return false;
         }
-        if (!Objects.equals(this.cFirstname, other.cFirstname)) {
+        if (!Objects.equals(this.Firstname, other.Firstname)) {
             return false;
         }
-        if (!Objects.equals(this.cLastname, other.cLastname)) {
+        if (!Objects.equals(this.Lastname, other.Lastname)) {
             return false;
         }
         return true;
@@ -95,7 +110,8 @@ public class Costumer implements Serializable {
 
     @Override
     public String toString() {
-        return "Costumer{" + "cFirstname=" + cFirstname + ", cLastname=" + cLastname + ", cTelNumber=" + cTelNumber + ", cBalance=" + cBalance + '}';
+        return "Costumer: " + "Firstname=" + Firstname + ", Lastname=" + Lastname + ", TelNumber=" + TelNumber + ", Balance=" + Balance;
     }
-    
+
+ 
 }

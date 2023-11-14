@@ -20,15 +20,15 @@ public class ProductManager {
         System.out.println("-------- Add new product --------");
         System.out.println();
 
-        System.out.print("Enter product name: ");
+        System.out.println("Enter product name: ");
         String nameN = scanner.nextLine();
 
-        System.out.print("Enter product type: ");
+        System.out.println("Enter product type: ");
         String typeT = scanner.nextLine();
 
         double priceP;
         while (true) {
-            System.out.print("Enter price of product (x.xx): ");
+            System.out.println("Enter price of product (x.xx): ");
             String priceString = scanner.nextLine();
             try {
                 priceP = Double.parseDouble(priceString);
@@ -42,7 +42,7 @@ public class ProductManager {
             }
         }
 
-        System.out.print("Enter quantity of product: ");
+        System.out.println("Enter quantity of product: ");
         int quantityQ = InputFromKeyboard.inputNumberFromRange(1, 100);
         Product newProduct = new Product(nameN, priceP, typeT, quantityQ);
         productList.add(newProduct);
@@ -59,4 +59,28 @@ public class ProductManager {
             System.out.println(product);
         }
     }
+    
+    public void replenishProductQuantity() {
+    System.out.println("-------- Replenish Product Quantity --------");
+    System.out.println("Choose a product:");
+
+    for (int i = 0; i < productList.size(); i++) {
+        System.out.println((i + 1) + ". " + productList.get(i));
+    }
+
+    int productChoice = InputFromKeyboard.inputNumberFromRange(1, productList.size());
+    Product selectedProduct = productList.get(productChoice - 1);
+
+    System.out.print("Enter the quantity to replenish: ");
+    int quantityToReplenish = InputFromKeyboard.inputNumberFromRange(0, Integer.MAX_VALUE);
+
+    selectedProduct.setQuantity(selectedProduct.getQuantity() + quantityToReplenish);
+
+    System.out.println("Product quantity replenished. New quantity: " + selectedProduct.getQuantity());
+    }
+
+
+
+ 
+
 }
