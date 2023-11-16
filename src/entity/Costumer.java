@@ -10,6 +10,7 @@ public class Costumer implements Serializable {
     private String Lastname;
     private int TelNumber;
     private double Balance;
+    private int numberOfPurchases;
     
      public String getFullName() {
         return Firstname + " " + Lastname;
@@ -109,11 +110,20 @@ public class Costumer implements Serializable {
         }
         return true;
     }
+    
+    public int getNumberOfPurchases() {
+        return numberOfPurchases;
+    }
+
+    public void incrementNumberOfPurchases() {
+        numberOfPurchases++;
+    }
+    
 
     @Override
     public String toString() {
-        return "Costumer: " + "Firstname=" + Firstname + ", Lastname=" + Lastname + ", TelNumber=" + TelNumber + ", Balance=" + Balance;
+        return "Costumer: " + "Firstname=" + Firstname + ", Lastname=" + Lastname + ", TelNumber=" + TelNumber + ", Balance=" + Balance + " EUR";
     }
 
- 
+     
 }

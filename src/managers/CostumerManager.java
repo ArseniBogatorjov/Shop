@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Scanner;
 import entity.Costumer;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import tools.InputFromKeyboard;
 
 public class CostumerManager {
@@ -14,6 +16,8 @@ public class CostumerManager {
         this.costumerList = costumerList;
         this.scanner = scanner;
     }
+    
+    
 
     public void addCostumer() {
         System.out.println();
@@ -44,7 +48,7 @@ public class CostumerManager {
         for (int i = 0; i < costumerList.size(); i++) {
             System.out.println((i + 1) + ". " + costumerList.get(i).getFullName());
         }
-        System.out.print("Your choice:");
+        System.out.print("Your choice: ");
         int choice = InputFromKeyboard.inputNumberFromRange(1, costumerList.size());
 
         double amount;
@@ -66,7 +70,7 @@ public class CostumerManager {
         Costumer selectedCostumer = costumerList.get(choice - 1);
         selectedCostumer.addBalance(amount);
 
-        System.out.println("Balance added successfully. New balance: " + selectedCostumer.getBalance());
+        System.out.println("Balance added successfully. New balance: " + selectedCostumer.getBalance() + "EUR");
     }
 
     public List<Costumer> getCostumerList() {
@@ -77,6 +81,17 @@ public class CostumerManager {
         System.out.println("List of all costumers:");
         for (Costumer costumer : costumerList) {
             System.out.println(costumer);
+        }
+    }
+    
+        public void displayCustomerRating() {
+        System.out.println("-------- Customer Rating --------");
+        Collections.sort(costumerList, Comparator.comparingInt(Costumer::getNumberOfPurchases).reversed());
+
+        for (int i = 0; i < costumerList.size(); i++) {
+            Costumer costumer = costumerList.get(i);
+            System.out.println((i + 1) + ". " + costumer.getFullName() +
+                    " - Number of Purchases: " + costumer.getNumberOfPurchases());
         }
     }
 }

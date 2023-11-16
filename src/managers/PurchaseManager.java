@@ -4,17 +4,23 @@ import java.util.List;
 import java.util.Scanner;
 import entity.Costumer;
 import entity.Product;
+import java.util.Collections;
+import java.util.Comparator;
 import tools.InputFromKeyboard;
 
 public class PurchaseManager {
     private List<Costumer> costumerList;
     private List<Product> productList;
     private Scanner scanner;
-
+    private double totalSales;
+    private int numberOfSales;
+    
     public PurchaseManager(List<Costumer> costumerList, List<Product> productList, Scanner scanner) {
         this.costumerList = costumerList;
         this.productList = productList;
         this.scanner = scanner;
+        this.totalSales = 0;
+        
     }
 
     public void makePurchase() {
@@ -52,7 +58,7 @@ public class PurchaseManager {
 
         if (selectedProduct.getQuantity() == 0) {
             System.out.println("Sorry, this product is out of stock. Purchase declined.");
-            return;  // Завершаем операцию покупки
+            return;
         }
 
         System.out.print("Enter the quantity to purchase: ");
@@ -63,9 +69,33 @@ public class PurchaseManager {
         if (totalCost <= selectedCustomer.getBalance() && quantityToPurchase <= selectedProduct.getQuantity()) {
             selectedCustomer.subtractBalance(totalCost);
             selectedProduct.subtractQuantity(quantityToPurchase);
-            System.out.println("Purchase successful. New balance: " + selectedCustomer.getBalance());
+            selectedProduct.recordSale(quantityToPurchase);
+            totalSales += totalCost;
+            selectedCustomer.incrementNumberOfPurchases();
+            System.out.println("Purchase successful. New balance: " + selectedCustomer.getBalance() + " EUR");
         } else {
             System.out.println("Insufficient funds or insufficient quantity. Purchase declined.");
         }
     }
+    
+    public void displayTotalSales() {
+        System.out.println("-------- Total Sales --------");
+        System.out.println("Total Sales: " + totalSales + " EUR");
+    }
+    
+    public void displayProductRanking() {
+        System.out.println("-------- Product Ranking by Sales --------");
+        if (productList.isEmpty()) {
+            System.out.println("No products available.");
+            return;
+        }
+
+        Collections.sort(productList, Comparator.comparingInt(Product::getQuantitySold).reversed());
+
+        for (int i = 0; i < productList.size(); i++) {
+            Product product = productList.get(i);
+            System.out.println((i + 1) + ". " + product.getName() + " - Sold: " + product.getQuantitySold() + " units");
+        }
+    }
+    
 }

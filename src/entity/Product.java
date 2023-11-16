@@ -13,12 +13,14 @@ public class Product implements Serializable {
     private double price;
     private String type;
     private int quantity;
+    private int quantitySold;
 
     public Product(String name, double price, String type, int quantity) {
         this.name = name;
         this.price = price;
         this.type = type;
         this.quantity = quantity;
+        this.quantitySold = 0;
     }
     
     public void subtractQuantity(int quantity) {
@@ -101,9 +103,18 @@ public class Product implements Serializable {
         }
         return true;
     }
+    
+    
+    public int getQuantitySold() {
+        return quantitySold;
+    }
 
+    public void recordSale(int quantity) {
+        this.quantitySold += quantity;
+    }
+    
     @Override
     public String toString() {
-        return "Product(" + "name=" + name + ", price=" + price + ", type=" + type + ", quantity=" + quantity+")";
+        return "Product(" + "name=" + name + ", price=" + price + " EUR" + ", type=" + type + ", quantity=" + quantity+")";
     }
 }

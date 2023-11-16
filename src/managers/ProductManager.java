@@ -78,9 +78,70 @@ public class ProductManager {
 
     System.out.println("Product quantity replenished. New quantity: " + selectedProduct.getQuantity());
     }
+    
+    
+    public void editProduct() {
+        System.out.println("-------- Edit Product Data --------");
+        System.out.println("Choose a product to edit:");
 
+        for (int i = 0; i < productList.size(); i++) {
+            System.out.println((i + 1) + ". " + productList.get(i));
+        }
 
+        int productChoice = InputFromKeyboard.inputNumberFromRange(1, productList.size());
+        Product selectedProduct = productList.get(productChoice - 1);
 
- 
+        System.out.println("Choose what to edit:");
+        System.out.println("1. Edit name");
+        System.out.println("2. Edit type");
+        System.out.println("3. Edit price");
+        System.out.println("4. Edit quantity");
+        System.out.println("5. Cancel");
+
+        System.out.print("Your choice: ");
+        int editChoice = InputFromKeyboard.inputNumberFromRange(1, 5);
+
+        switch (editChoice) {
+            case 1:
+                System.out.print("Enter new name: ");
+                String newName = scanner.nextLine();
+                selectedProduct.setName(newName);
+                System.out.println("Name updated successfully.");
+                break;
+            case 2:
+                System.out.print("Enter new type: ");
+                String newType = scanner.nextLine();
+                selectedProduct.setType(newType);
+                System.out.println("Type updated successfully.");
+                break;
+            case 3:
+                System.out.print("Enter new price (in x.xx format): ");
+                String newPriceString = scanner.nextLine();
+                try {
+                    double newPrice = Double.parseDouble(newPriceString);
+                    if (newPrice > 0 && newPriceString.matches("^\\d+\\.\\d{2}$")) {
+                        selectedProduct.setPrice(newPrice);
+                        System.out.println("Price updated successfully.");
+                    } else {
+                        System.out.println("Price must be in format x.xx and greater than zero");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid price entry format.");
+                }
+                break;
+            case 4:
+                System.out.print("Enter new quantity: ");
+                int newQuantity = InputFromKeyboard.inputNumberFromRange(0, Integer.MAX_VALUE);
+                selectedProduct.setQuantity(newQuantity);
+                System.out.println("Quantity updated successfully.");
+                break;
+            case 5:
+                System.out.println("Editing canceled.");
+                break;
+            default:
+                System.out.println("Invalid choice. Editing canceled.");
+                break;
+        }
+    }
 
 }
