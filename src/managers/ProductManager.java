@@ -54,6 +54,10 @@ public class ProductManager {
     }
 
     public void displayAllProducts() {
+        if (productList.isEmpty()) {
+            System.out.println("No products available.");
+            return;
+        }
         System.out.println("List of all products:");
         for (Product product : productList) {
             System.out.println(product);
@@ -62,12 +66,16 @@ public class ProductManager {
     
     public void replenishProductQuantity() {
     System.out.println("-------- Replenish Product Quantity --------");
+    if (productList.isEmpty()) {
+        System.out.println("No products available.");
+        return;
+    }
     System.out.println("Choose a product:");
 
     for (int i = 0; i < productList.size(); i++) {
         System.out.println((i + 1) + ". " + productList.get(i));
     }
-
+        System.out.print("Your choice: ");
     int productChoice = InputFromKeyboard.inputNumberFromRange(1, productList.size());
     Product selectedProduct = productList.get(productChoice - 1);
 
@@ -82,6 +90,10 @@ public class ProductManager {
     
     public void editProduct() {
         System.out.println("-------- Edit Product Data --------");
+        if (productList.isEmpty()) {
+            System.out.println("No products available.");
+            return;
+        }
         System.out.println("Choose a product to edit:");
 
         for (int i = 0; i < productList.size(); i++) {
@@ -143,5 +155,6 @@ public class ProductManager {
                 break;
         }
     }
+    
 
 }

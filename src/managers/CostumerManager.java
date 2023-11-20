@@ -33,7 +33,7 @@ public class CostumerManager {
         System.out.println("Enter costumer telephone number:");
         int Tnumber = scanner.nextInt();
 
-        // Очистка буфера ввода
+        
         scanner.nextLine();
 
         Costumer newCostumer = new Costumer(Fname, Lname, Tnumber, 0);
@@ -43,6 +43,12 @@ public class CostumerManager {
 
     public void addBalance() {
         System.out.println("-------- Add Balance to Costumer --------");
+        
+        if (costumerList.isEmpty()) {
+            System.out.println("No customers available");
+            return;
+        }
+        
         System.out.println("Choose a costumer:");
 
         for (int i = 0; i < costumerList.size(); i++) {
@@ -78,6 +84,10 @@ public class CostumerManager {
     }
 
     public void displayAllCostumers() {
+        if (costumerList.isEmpty()) {
+            System.out.println("No customers available.");
+            return;
+        }
         System.out.println("List of all costumers:");
         for (Costumer costumer : costumerList) {
             System.out.println(costumer);
@@ -86,6 +96,10 @@ public class CostumerManager {
     
         public void displayCustomerRating() {
         System.out.println("-------- Customer Rating --------");
+        if (costumerList.isEmpty()) {
+            System.out.println("No customers available.");
+            return;
+        }
         Collections.sort(costumerList, Comparator.comparingInt(Costumer::getNumberOfPurchases).reversed());
 
         for (int i = 0; i < costumerList.size(); i++) {
@@ -94,4 +108,6 @@ public class CostumerManager {
                     " - Number of Purchases: " + costumer.getNumberOfPurchases());
         }
     }
+        
+
 }
